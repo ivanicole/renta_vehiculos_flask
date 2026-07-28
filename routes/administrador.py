@@ -19,6 +19,17 @@ def dashboard():
     return render_template("administrador/dashboard.html")
 
 
+@administrador.route("/perfil")
+def perfil():
+    if "id" not in session:
+        return redirect(url_for("acceso.index"))
+
+    if session["rol"] != "Administrador":
+        return redirect(url_for("acceso.index"))
+
+    return render_template("administrador/perfil.html")
+
+
 @administrador.route("/agregar_vehiculo", methods=["GET", "POST"])
 def agregar_vehiculo():
     if "id" not in session:
